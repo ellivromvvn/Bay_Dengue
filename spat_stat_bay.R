@@ -29,24 +29,31 @@ Labs1<-c("Cabuaan","Don Mariano Marcos","Don Domingo Madella",
         "Paitan","Vista Alegre","Buenavista","Magapuy","Bansing")
 #the map
 
-tmap_mode("view")
+tmap_mode("plot")
 
 qtm(shp = bay, fill = "Cases", fill.palette = "Reds", text = "Labs",
     text.col = "black", fill.title = "", text.size = 0.7,
     title = "2018 Dengue Cases in Bayombong, Nueva Vizcaya")
-    
-map1 <- tm_shape(bay) +
-  tm_polygons('Cases', title = "",palette = 'Reds', alpha = 0.7, id="Labs1")
-map1 + tm_layout(basemaps = c('OpenStreetMap'), title = "2018 Dengue Cases in Bayombong, Nueva Vizccaya", title.size = 10)
+#view    
+tm_shape(bay) +
+tm_polygons('Cases', title = "",palette = 'Reds', alpha = 0.7,
+            id="Labs1") +
+tm_layout(basemaps = c('OpenStreetMap'),
+          title = "2018 Dengue Cases of Bayombong, Nueva Vizcaya",
+          title.size = 2)
 
-
-
-#editing saved file
-png("Dplot.png",width=7,height=7, units="in",res=2500)
-qtm(shp = bay, fill = "Cases", fill.palette = "Reds", text = "Labs",
-    text.col = "black", fill.title = "", text.size = 0.7,
-    title = "2018 Dengue Cases in Bayombong, Nueva Vizcaya")
+#plot
+png("Dengueplot.png", width = 10, height = 6.5, units = "in", res=2300)
+tm_shape(bay) +
+tm_polygons('Cases', title = "",palette = 'Reds', alpha = 0.7,
+            id="Labs1") +
+tm_credits("ODHombrebueno, NVSU", position = c("right","BOTTOM")) +
+tm_text("Labs", col = "black", size = 0.5) +
+tm_layout(title = "2018 Dengue Cases of Bayombong, Nueva Vizcaya",
+          title.size = 1)
 dev.off()
+
+
 
 #TS of dengue cases
 
